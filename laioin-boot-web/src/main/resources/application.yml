@@ -1,0 +1,42 @@
+spring:
+  port: 8080
+  session:
+      timeout: 7200
+  profiles:
+    active: pro
+    #active: ${spring.profiles.active}
+  application:
+    name: bixin
+  devtools:
+      restart:
+        enabled: true
+      remote:
+        secret: secret
+  jackson: # json 序列化配置
+      date-format: yyyy-MM-dd HH:mm:ss # 时间格式配置
+      time-zone: GMT+8 # 时区
+      default-property-inclusion: non-null # json 序列化时，null 值时不序列化字段
+  datasource:
+      url: ${druid.url}
+      username: ${druid.username}
+      password: ${druid.password}
+      driver-class-name: ${druid.driverClassName}
+      transaction:
+         rollback-on-commit-failure: true
+      type: com.alibaba.druid.pool.DruidDataSource
+      druid:
+        max-active: 20
+        initial-size: 1
+        min-idle: 3
+        max-wait: 60000
+        time-between-eviction-runs-millis: 300000
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: false
+
+debug: false
+
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.laioin.boot.server.entry
