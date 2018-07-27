@@ -3,10 +3,10 @@ spring:
   session:
       timeout: 7200
   profiles:
-    active: pro
+    active: ${profiles.active}
     #active: ${spring.profiles.active}
   application:
-    name: bixin
+    name: laioin-boot
   devtools:
       restart:
         enabled: true
