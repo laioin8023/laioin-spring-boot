@@ -1,7 +1,9 @@
 package com.laioin.boot.common.utils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -109,5 +111,36 @@ public class Tools {
             flag = false;
         }
         return flag;
+    }
+
+    /**
+     * 获取订单号
+     *
+     * @param key
+     * @return
+     */
+    public static String getOrderNo(String key) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddmmssSSS");
+        StringBuilder sb = new StringBuilder();
+        sb.append(key);
+        sb.append(sdf.format(new Date()));
+        sb.append(Tools.getRandomNumberByLength(6));
+        return sb.toString();
+    }
+
+    /**
+     * 获取一定长度的随机数字
+     *
+     * @param length 指定数字长度
+     * @return 一定长度的数字
+     */
+    public static String getRandomNumberByLength(int length) {
+        String base = "0123456789";
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = RANDOM_STR_LEM.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        return sb.toString();
     }
 }
