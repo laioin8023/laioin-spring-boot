@@ -1,9 +1,11 @@
-spring:
-  port: 8080
-  session:
+server:
+    port: 8081
+    session:
       timeout: 7200
+
+spring:
   profiles:
-    active: ${profiles.active}
+    active: ${profiles_active}
     #active: ${spring.profiles.active}
   application:
     name: laioin-boot

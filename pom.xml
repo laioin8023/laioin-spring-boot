@@ -77,6 +77,11 @@
             <artifactId>jcl-over-slf4j</artifactId>
             <version>1.7.25</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>2.6.1</version>
+        </dependency>
 
         <!-- mybatis 相关 -->
         <dependency>
@@ -124,7 +129,8 @@
         <profile>
             <id>dev</id>
             <properties>
-                <profiles.active>dev</profiles.active>
+                <profiles_active>dev</profiles_active>
+                <log_level>DEBUG</log_level>
                 <LOG_PATH>d://data/log</LOG_PATH>
                 <!-- 数据库配置 -->
                 <druid.driverClassName>com.mysql.jdbc.Driver</druid.driverClassName>
@@ -152,7 +158,8 @@
         <profile>
             <id>pro</id>
             <properties>
-                <profiles.active>pro</profiles.active>
+                <log_level>INFO</log_level>
+                <profiles_active>pro</profiles_active>
                 <LOG_PATH>/data/logs</LOG_PATH>
                 <!-- 数据库配置 -->
                 <druid.driverClassName>com.mysql.jdbc.Driver</druid.driverClassName>
