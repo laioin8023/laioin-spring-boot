@@ -41,6 +41,7 @@ public class DESUtil {
 			// 加密，并把字节数组编码成字符串
 			encryptedData = Base64.encodeBase64String(cipher.doFinal(data.getBytes()));
 		} catch (Exception e) {
+			// log.error("加密错误，错误信息：", e);
 			throw new RuntimeException("加密错误，错误信息：", e);
 		}
 		return encryptedData;
@@ -69,6 +70,7 @@ public class DESUtil {
 			// 把字符串解码为字节数组，并解密
 			decryptedData = new String(cipher.doFinal(Base64.decodeBase64(cryptData)));
 		} catch (Exception e) {
+			// log.error("解密错误，错误信息：", e);
 			throw new RuntimeException("解密错误，错误信息：", e);
 		}
 		return decryptedData;

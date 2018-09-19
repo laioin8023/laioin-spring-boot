@@ -1,27 +1,23 @@
 package com.laioin.boot.common.pagination;
 
-import java.lang.reflect.Proxy;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.Properties;
-
 import com.laioin.boot.common.utils.StringUtils;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.plugin.Intercepts;
-import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Plugin;
-import org.apache.ibatis.plugin.Signature;
+import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.lang.reflect.Proxy;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Properties;
 
 
 /**
@@ -44,7 +40,7 @@ public class PaginationInterceptor implements Interceptor {
 
 
     /**
-     * Physical Pagination Interceptor for all the queries with parameter {@link org.apache.ibatis.session.RowBounds}
+     * Physical Pagination Interceptor for all the queries with parameter {@link RowBounds}
      */
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -158,32 +154,8 @@ public class PaginationInterceptor implements Interceptor {
      * @return CountOptimize
      */
     private String getCountOptimize(String originalSql) {
-        // 调整SQL便于解析
-        String tempSql = originalSql.replaceAll("(?i)ORDER[\\s]+BY", "ORDER BY").replaceAll("(?i)GROUP[\\s]+BY", "GROUP BY");
-        String indexOfSql = tempSql.toUpperCase();
-        // 有排序情况
-        int orderByIndex = indexOfSql.lastIndexOf("ORDER BY");
-
         StringBuilder countSql = new StringBuilder("SELECT COUNT(1) ");
-        boolean optimize = false;
-        if (!indexOfSql.contains("DISTINCT") && !indexOfSql.contains("GROUP BY")) {
-            int formIndex = indexOfSql.indexOf("FROM");
-            if (formIndex > -1) {
-                if (orderByIndex > -1) {
-                    tempSql = tempSql.substring(0, orderByIndex);
-                    countSql.append(tempSql.substring(formIndex));
-                    // 无排序情况
-                } else {
-                    countSql.append(tempSql.substring(formIndex));
-                }
-                // 执行优化
-                optimize = true;
-            }
-        }
-        if (!optimize) {
-            // 无优化SQL
-            countSql.append("FROM ( ").append(originalSql).append(" ) TOTAL");
-        }
+        countSql.append("FROM ( ").append(originalSql).append(" ) TOTAL");
         return countSql.toString();
     }
 
