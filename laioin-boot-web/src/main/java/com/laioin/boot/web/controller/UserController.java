@@ -1,5 +1,6 @@
 package com.laioin.boot.web.controller;
 
+import com.laioin.boot.common.alipay.AliPayConfig;
 import com.laioin.boot.common.modle.ResultMsg;
 import com.laioin.boot.common.pagination.Pagination;
 import com.laioin.boot.server.entry.User;
@@ -22,6 +23,8 @@ public class UserController extends BaseController {
 
     @Autowired
     private IUserService userService;
+    @Autowired
+    private AliPayConfig aliPayConfig;
 
     /**
      * 查找用户
