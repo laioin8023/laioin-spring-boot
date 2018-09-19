@@ -16,10 +16,9 @@ import java.io.InputStream;
 @Configuration
 @PropertySource("classpath:wxpay_config.properties")
 @Component
-public class WXPayConfigImpl extends WXPayConfig {
+public class WXPayConfigImpl implements IWXPayConfig {
 
     private byte[] certData;
-    private static WXPayConfigImpl INSTANCE;
 
     /**
      * 证书文件路径
@@ -43,7 +42,7 @@ public class WXPayConfigImpl extends WXPayConfig {
     private String key;
 
 
-    private WXPayConfigImpl() throws Exception {
+    public WXPayConfigImpl() throws Exception {
         File file = new File(certPath);
         if (file.exists()) {
             InputStream certStream = new FileInputStream(file);
@@ -53,16 +52,6 @@ public class WXPayConfigImpl extends WXPayConfig {
         }
     }
 
-    public static WXPayConfigImpl getInstance() throws Exception {
-        if (INSTANCE == null) {
-            synchronized (WXPayConfigImpl.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new WXPayConfigImpl();
-                }
-            }
-        }
-        return INSTANCE;
-    }
 
     @Override
     public String getAppID() {
@@ -98,7 +87,7 @@ public class WXPayConfigImpl extends WXPayConfig {
     }
 
     @Override
-    IWXPayDomain getWXPayDomain() {
+    public IWXPayDomain getWXPayDomain() {
         return WXPayDomainSimpleImpl.instance();
     }
 
@@ -118,5 +107,16 @@ public class WXPayConfigImpl extends WXPayConfig {
     @Override
     public int getReportBatchSize() {
         return 2;
+    }
+
+
+    @Override
+    public boolean shouldAutoReport() {
+        return true;
+    }
+
+    @Override
+    public int getReportQueueMaxSize() {
+        return 10000;
     }
 }

@@ -49,7 +49,7 @@ public class WXPayDomainSimpleImpl implements IWXPayDomain {
     }
 
     @Override
-    public synchronized DomainInfo getDomain(final WXPayConfig config) {
+    public synchronized DomainInfo getDomain(final IWXPayConfig config) {
         DomainStatics primaryDomain = domainData.get(WXPayConstants.DOMAIN_API);
         if (primaryDomain == null ||
                 primaryDomain.isGood()) {

@@ -20,7 +20,7 @@ public  interface IWXPayDomain {
      * @param config 配置
      * @return 域名
      */
-     DomainInfo getDomain(final WXPayConfig config);
+     DomainInfo getDomain(final IWXPayConfig config);
 
      class DomainInfo{
          /**

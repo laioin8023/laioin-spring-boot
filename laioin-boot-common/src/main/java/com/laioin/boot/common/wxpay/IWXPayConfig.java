@@ -8,14 +8,14 @@ import java.io.InputStream;
  * 微信配置类
  */
 @Component
-public abstract class WXPayConfig {
+public interface IWXPayConfig {
 
     /**
      * 获取 App ID
      *
      * @return App ID
      */
-    abstract String getAppID();
+    String getAppID();
 
 
     /**
@@ -23,7 +23,7 @@ public abstract class WXPayConfig {
      *
      * @return Mch ID
      */
-    abstract String getMchID();
+    String getMchID();
 
 
     /**
@@ -31,7 +31,7 @@ public abstract class WXPayConfig {
      *
      * @return API密钥
      */
-    abstract String getKey();
+    String getKey();
 
 
     /**
@@ -39,32 +39,28 @@ public abstract class WXPayConfig {
      *
      * @return 商户证书内容
      */
-    abstract InputStream getCertStream();
+    InputStream getCertStream();
 
     /**
      * HTTP(S) 连接超时时间，单位毫秒
      *
      * @return
      */
-    public int getHttpConnectTimeoutMs() {
-        return 6 * 1000;
-    }
+    int getHttpConnectTimeoutMs();
 
     /**
      * HTTP(S) 读数据超时时间，单位毫秒
      *
      * @return
      */
-    public int getHttpReadTimeoutMs() {
-        return 8 * 1000;
-    }
+    int getHttpReadTimeoutMs();
 
     /**
      * 获取WXPayDomain, 用于多域名容灾自动切换
      *
      * @return
      */
-    abstract IWXPayDomain getWXPayDomain();
+    IWXPayDomain getWXPayDomain();
 
     /**
      * 是否自动上报。
@@ -72,18 +68,14 @@ public abstract class WXPayConfig {
      *
      * @return
      */
-    public boolean shouldAutoReport() {
-        return true;
-    }
+    boolean shouldAutoReport();
 
     /**
      * 进行健康上报的线程的数量
      *
      * @return
      */
-    public int getReportWorkerNum() {
-        return 6;
-    }
+    int getReportWorkerNum();
 
 
     /**
@@ -92,17 +84,13 @@ public abstract class WXPayConfig {
      *
      * @return
      */
-    public int getReportQueueMaxSize() {
-        return 10000;
-    }
+    int getReportQueueMaxSize();
 
     /**
      * 批量上报，一次最多上报多个数据
      *
      * @return
      */
-    public int getReportBatchSize() {
-        return 10;
-    }
+    int getReportBatchSize();
 
 }

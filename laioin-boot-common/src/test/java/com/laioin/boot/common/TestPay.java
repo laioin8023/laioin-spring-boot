@@ -3,6 +3,7 @@ package com.laioin.boot.common;
 import com.alipay.api.AlipayClient;
 import com.laioin.boot.common.alipay.AliPay;
 import com.laioin.boot.common.alipay.AliPayConfig;
+import com.laioin.boot.common.wxpay.IWXPayConfig;
 import com.laioin.boot.common.wxpay.WXPay;
 import com.laioin.boot.common.wxpay.WXPayConfigImpl;
 import com.laioin.boot.common.wxpay.WXPayUtil;
@@ -25,6 +26,8 @@ public class TestPay {
 
     @Autowired
     private AliPayConfig aliPayConfig;
+    @Autowired
+    private WXPayConfigImpl wxPayConfig;
 
     /**
      * 支付宝，生成支付信息
@@ -43,7 +46,7 @@ public class TestPay {
      */
     @Test
     public void testWxPay() throws Exception {
-        WXPay wxPay = new WXPay(WXPayConfigImpl.getInstance());
+        WXPay wxPay = new WXPay(wxPayConfig);
         HashMap<String, String> datas = new HashMap<String, String>();
         datas.put("body", "test");//商品描述
         datas.put("out_trade_no", "OD12322");//商户订单号

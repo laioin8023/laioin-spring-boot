@@ -1,15 +1,15 @@
 package com.laioin.boot.common.alipay;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
-import org.springframework.test.context.ContextConfiguration;
 
 /**
  * 支付宝，配置信息
  */
 
-@ContextConfiguration
+@Configuration
 @PropertySource("classpath:alipay_config.properties")
 @Component
 public class AliPayConfig {

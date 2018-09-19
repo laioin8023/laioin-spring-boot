@@ -31,9 +31,9 @@ import static com.laioin.boot.common.wxpay.WXPayConstants.USER_AGENT;
  * http 请求类
  */
 public class WXPayRequest {
-    private WXPayConfig config;
+    private IWXPayConfig config;
 
-    public WXPayRequest(WXPayConfig config) throws Exception {
+    public WXPayRequest(IWXPayConfig config) throws Exception {
 
         this.config = config;
     }

@@ -3,6 +3,7 @@ package com.laioin.boot.web.controller;
 import com.laioin.boot.common.alipay.AliPayConfig;
 import com.laioin.boot.common.modle.ResultMsg;
 import com.laioin.boot.common.pagination.Pagination;
+import com.laioin.boot.common.wxpay.WXPayConfigImpl;
 import com.laioin.boot.server.entry.User;
 import com.laioin.boot.server.service.IUserService;
 import com.laioin.boot.web.base.BaseController;
@@ -25,6 +26,8 @@ public class UserController extends BaseController {
     private IUserService userService;
     @Autowired
     private AliPayConfig aliPayConfig;
+    @Autowired
+    private WXPayConfigImpl wxPayConfig;
 
     /**
      * 查找用户

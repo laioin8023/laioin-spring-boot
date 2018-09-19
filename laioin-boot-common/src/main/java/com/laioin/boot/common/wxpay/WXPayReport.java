@@ -142,12 +142,12 @@ public class WXPayReport {
     private static final int DEFAULT_READ_TIMEOUT_MS = 8 * 1000;
 
     private LinkedBlockingQueue<String> reportMsgQueue = null;
-    private WXPayConfig config;
+    private IWXPayConfig config;
     private ExecutorService executorService;
 
     private volatile static WXPayReport INSTANCE;
 
-    private WXPayReport(final WXPayConfig config) {
+    private WXPayReport(final IWXPayConfig config) {
         this.config = config;
         reportMsgQueue = new LinkedBlockingQueue<String>(config.getReportQueueMaxSize());
 
@@ -206,7 +206,7 @@ public class WXPayReport {
      * @param config
      * @return
      */
-    public static WXPayReport getInstance(WXPayConfig config) {
+    public static WXPayReport getInstance(IWXPayConfig config) {
         if (INSTANCE == null) {
             synchronized (WXPayReport.class) {
                 if (INSTANCE == null) {
